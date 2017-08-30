@@ -1,0 +1,25 @@
+{
+  "name": "node-bunyan-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timberio/node-bunyan-example.git"
+  },
+  "author": "Garet McKinley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timberio/node-bunyan-example/issues"
+  },
+  "homepage": "https://github.com/timberio/node-bunyan-example#readme",
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "express": "^4.15.4",
+    "timber": "2.1.0-beta.3"
+  }
+}
