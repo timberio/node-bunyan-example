@@ -27,7 +27,6 @@ app.use(timber.middlewares.express);
 timber.config.logger = log;
 // Enable logging of the request/response body (defaults to false)
 timber.config.capture_request_body = true;
-timber.config.capture_response_body = true;
 
 
 // Create the index route
@@ -35,15 +34,19 @@ app.get('/', (req, res) => {
   res.send('Welcome to the index route :)');
 });
 
-// This route returns JSON data.
-// Since we enabled http body logging in the timber config,
-// the contents of the JSON object will be sent to timber.
-app.get('/json', (req, res) => {
+// If you post json data to this route it will be logged in Timber
+app.post('/post', (req, res) => {
   res.json({
-    description: 'This is some sample JSON data',
+    description: 'Check your timber console',
     date: new Date(),
-    get: req.params
+    body: req.body
   });
+});
+
+// This route throws an exception upon load,
+// demonstrating how exceptions appear on timber.
+app.get('/exception', (req, res) => {
+  throw new Error('This is an exception');
 });
 
 // Start our express server
