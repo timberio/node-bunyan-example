@@ -9,24 +9,24 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 // Initialize our timber transport stream
-const stream = new timber.transports.HTTPS('Your-Timber-API-Key');
+const transport = new timber.transports.HTTPS('Your-Timber-API-Key');
+timber.install(transport)
 
 // Create our bunyan logger and attach our stream
 const log = bunyan.createLogger({
   name: 'Timber Logger',
-  stream: new timber.transports.Bunyan({ stream })
+  stream: new timber.transports.Bunyan()
 });
 
 // Add the express middleware to log HTTP events
-app.use(timber.middlewares.express);
+// And enable logging of the request/response body (defaults to false)
+app.use(timber.middlewares.express({ capture_request_body: true }));
 
 
 // Configure timber...
 // The timber logger must be set so that the express middleware
 // uses the correct logger. The middleware logs to console by default
 timber.config.logger = log;
-// Enable logging of the request/response body (defaults to false)
-timber.config.capture_request_body = true;
 
 
 // Create the index route
